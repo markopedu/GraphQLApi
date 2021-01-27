@@ -1,0 +1,30 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+type Query {
+    sessions: [Session]
+}
+
+type Session {
+    day: String
+    description: String
+    endsAt: String
+    format: String
+    id: ID!
+    level: String
+    room: String
+    startsAt: String
+    title: String!
+    track: String
+}
+
+enum CacheControlScope {
+    PRIVATE
+    PUBLIC
+}
+
+
+scalar Upload
