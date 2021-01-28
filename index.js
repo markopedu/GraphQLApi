@@ -18,19 +18,17 @@ const server = new ApolloServer({
     dataSources,
     debug: false,
     formatError: (error => {
-        console.log('ERROR: ', error);
 
-        if(error.extensions.code == 'INTERNAL_SERVER_ERROR'){
-            return new ApolloError('We are having some trouble.', 'ERROR', { token: uuidv4() });
+        switch (error.extensions.code) {
+            case 'INTERNAL_SERVER_ERROR':
+                return new ApolloError('We are having some trouble.', 'ERROR', { token: uuidv4() });
+            case 'GRAPHQL_VALIDATION_FAILED':
+                return new ValidationError(error.message);
+            case 'SPEAKER_API_ERROR':
+                return new ApolloError(error.message, error.extensions.code, { token: error.extensions.token });
+            default:
+                return error;
         }
-        else if(error.extensions.code == 'GRAPHQL_VALIDATION_FAILED') {
-            return new ValidationError(error.message);
-        }
-        else if(error.extensions.code == 'SPEAKER_API_ERROR'){
-            return new ApolloError(error.message, error.extensions.code, { token: error.extensions.token });
-        }
-
-        return error;
     })
 });
 
