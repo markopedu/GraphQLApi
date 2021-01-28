@@ -36,4 +36,21 @@
   }
 }```
 
+### Union types 
+
+```query {
+ 	sessionById(id: "84473") {
+    ... on Session {
+       id
+       title
+    }
+    ... on Error {
+       code 
+       message
+       token
+    }
+  }
+}```
+
+
 

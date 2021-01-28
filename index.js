@@ -18,7 +18,7 @@ const server = new ApolloServer({
     dataSources,
     debug: false,
     formatError: (error => {
-
+        console.log(error);
         switch (error.extensions.code) {
             case 'INTERNAL_SERVER_ERROR':
                 return new ApolloError('We are having some trouble.', 'ERROR', { token: uuidv4() });
