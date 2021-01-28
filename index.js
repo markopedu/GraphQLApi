@@ -26,7 +26,11 @@ const server = new ApolloServer({
         else if(error.extensions.code == 'GRAPHQL_VALIDATION_FAILED') {
             return new ValidationError(error.message);
         }
+        else if(error.extensions.code == 'SPEAKER_API_ERROR'){
+            return new ApolloError(error.message, error.extensions.code, { token: error.extensions.token });
+        }
 
+        return error;
     })
 });
 
