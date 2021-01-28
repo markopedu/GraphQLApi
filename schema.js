@@ -35,4 +35,5 @@ module.exports = gql`
         format: String,
         track:String @deprecated(reason: "Too many tracks doesn't fit into a single session..."),
         level:String
+        speakers: [Speaker]
     }`;
